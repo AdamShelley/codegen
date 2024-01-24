@@ -19,17 +19,17 @@ import {
 } from "@/components/ui/table";
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  rowLink?: (rowData: TData) => string;
+  rowLink?: string;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  rowLink,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const table = useReactTable({
@@ -43,9 +43,11 @@ export function DataTable<TData, TValue>({
     },
   });
 
-  const genLink = (rowData: string) => {
-    // Assuming rowData has an 'id' property
-    return `/gens/${rowData}`;
+  const router = useRouter();
+
+  const handleRowClick = (rowData: any) => {
+    const link = '/gens/' + rowData.id  // Adjust as per your data structure
+    router.push(link);
   };
 
   return (
@@ -72,11 +74,12 @@ export function DataTable<TData, TValue>({
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
-              <Link href={genLink(row.id)} key={row.id}>
+              
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                   className="hover:cursor-pointer"
+                  onClick={() => handleRowClick(row.original)}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -87,7 +90,6 @@ export function DataTable<TData, TValue>({
                     </TableCell>
                   ))}
                 </TableRow>
-              </Link>
             ))
           ) : (
             <TableRow>
