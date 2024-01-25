@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
 import HeadingComponent from "./(landing)/_components/heading";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,9 +29,10 @@ export default function RootLayout({
           storageKey="code-gen"
         >
           <body className={inter.className}>
-            <HeadingComponent/>
+            <HeadingComponent />
+            <Toaster position="bottom-center" />
             {children}
-            </body>
+          </body>
         </ThemeProvider>
       </ConvexClientProvider>
     </html>

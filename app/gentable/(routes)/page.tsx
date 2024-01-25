@@ -1,5 +1,4 @@
-
-import HeadingComponent from "@/app/(landing)/_components/heading";
+import CreateButton from "../_components/create-button";
 import { Payment, columns } from "./columns";
 import { DataTable } from "./data-table";
 
@@ -32,8 +31,13 @@ export default async function DemoPage() {
   const data = await getData();
 
   return (
-    <div className="container mx-auto py-10 w-full flex justify-center">
-      <DataTable columns={columns} data={data} />
+    <div>
+      <div className="container flex justify-center w-full py-10 mx-auto">
+        <DataTable columns={columns} data={data} />
+      </div>
+      <div className="container flex justify-center w-full py-10 mx-auto">
+        <CreateButton />
+      </div>
     </div>
   );
 }

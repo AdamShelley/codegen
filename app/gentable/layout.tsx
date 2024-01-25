@@ -10,7 +10,7 @@ const GenLayout = ({ children }: { children: React.ReactNode }) => {
 
   if (isLoading)
     return (
-      <div className="h-full flex items-center justify-center">
+      <div className="flex items-center justify-center h-full">
         <Spinner size="large" />
       </div>
     );
@@ -20,9 +20,9 @@ const GenLayout = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <div className="h-full flex ">
+    <div className="flex h-full ">
       <Navigation />
-      <main className="flex-1 h-full overflow-y-auto">{children}</main>
+      <main className="w-full h-full overflow-y-auto ">{children}</main>
     </div>
   );
 };
