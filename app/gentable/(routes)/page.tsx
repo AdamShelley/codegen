@@ -38,6 +38,14 @@ export default async function DemoPage() {
       <div className="container flex justify-center w-full py-10 mx-auto">
         <CreateButton />
       </div>
+      <div className="container flex flex-col justify-center w-full py-10 mx-auto">
+        <h4>Todo</h4>
+        <ul className="flex flex-col">
+          <li>High score list</li>
+          <li>Timer</li>
+          <li>Keep sidebar just in gens? Not main table?</li>
+        </ul>
+      </div>
     </div>
   );
 }
