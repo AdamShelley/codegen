@@ -44,6 +44,7 @@ export default async function DemoPage() {
           <li>High score list</li>
           <li>Timer</li>
           <li>Keep sidebar just in gens? Not main table?</li>
+          <li>Rooms where you can solve problems together</li>
         </ul>
       </div>
     </div>
