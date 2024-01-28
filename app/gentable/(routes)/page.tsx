@@ -1,34 +1,42 @@
+"use client";
+
+import { useQuery } from "convex/react";
 import CreateButton from "../_components/create-button";
-import { Payment, columns } from "./columns";
+import { Gen, columns } from "./columns";
 import { DataTable } from "./data-table";
+import { api } from "@/convex/_generated/api";
 
-async function getData(): Promise<Payment[]> {
-  // Fetch data from your API here.
-  return [
-    {
-      id: "728ed52f",
-      difficulty: 1,
-      status: "Completed",
-      gens: "Do this problem",
-    },
-    {
-      id: "728ed52f",
-      difficulty: 2,
-      status: "Incomplete",
-      gens: "Then try this",
-    },
-    {
-      id: "728ed52f",
-      difficulty: 3,
-      status: "Incomplete",
-      gens: "Watch out for this one!",
-    },
-    // ...
-  ];
-}
+// async function getData(): Promise<Gen[]> {
+//   // Fetch data from your API here.
+//   return [
+//     {
+//       id: "728ed52f",
+//       difficulty: 1,
+//       status: "Completed",
+//       gens: "Do this problem",
+//     },
+//     {
+//       id: "728ed52f",
+//       difficulty: 2,
+//       status: "Incomplete",
+//       gens: "Then try this",
+//     },
+//     {
+//       id: "728ed52f",
+//       difficulty: 3,
+//       status: "Incomplete",
+//       gens: "Watch out for this one!",
+//     },
+//     // ...
+//   ];
+// }
 
-export default async function DemoPage() {
-  const data = await getData();
+export default function DemoPage() {
+  const data = useQuery(api.documents.get);
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>

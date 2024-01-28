@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { ColumnDef } from "@tanstack/react-table"
-import { Button } from "@/components/ui/button"
+import { ColumnDef } from "@tanstack/react-table";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,25 +9,25 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { MoreHorizontal, ArrowUpDown } from "lucide-react"
- 
+} from "@/components/ui/dropdown-menu";
+import { MoreHorizontal, ArrowUpDown } from "lucide-react";
+
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Payment = {
-  id: string
-  difficulty: number
-  status: string
-  gens: string,
-}
+export type Gen = {
+  id: string;
+  difficulty: number;
+  status: string;
+  gens: string;
+};
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Gen>[] = [
   {
     accessorKey: "status",
     header: "Status",
   },
   {
-    accessorKey: "gens",
+    accessorKey: "title",
     header: ({ column }) => {
       return (
         <Button
@@ -37,9 +37,8 @@ export const columns: ColumnDef<Payment>[] = [
           Gens
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
-
   },
   {
     accessorKey: "difficulty",
@@ -48,8 +47,8 @@ export const columns: ColumnDef<Payment>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original
- 
+      const payment = row.original;
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -70,7 +69,7 @@ export const columns: ColumnDef<Payment>[] = [
             <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
-]
+];

@@ -29,7 +29,7 @@ const Item = ({
     flex items-center p-2 cursor-pointer
     ${active ? "bg-white-500 text-white" : "bg-transparent text-gray-200"} 
     ${expanded ? "font-bold" : ""} 
-    hover:bg-blue-100
+    hover:text-white
     ${"pl-" + level * 2}
   `;
 

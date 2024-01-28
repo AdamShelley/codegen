@@ -8,9 +8,11 @@ import { cn } from "@/lib/utils";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import Item from "./item";
+import { useRouter } from "next/navigation";
 
 const Navigation = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const documents = useQuery(api.documents.get);
 
@@ -51,15 +53,20 @@ const Navigation = () => {
     }
   };
 
+  const handleItemClick = (document: string) => {
+    const link = "/gens/" + document;
+    router.push(link);
+  };
+
   return (
     <>
       {isCollapsed ? null : (
-        <div className="fixed inset-0  z-40 backdrop-blur-[2px]" />
+        <div onClick={collapse} className="fixed inset-0  z-40 bg-black/50" />
       )}
       <aside
         ref={sidebarRef}
         className={cn(
-          "fixed top-20 left-0 mt-5 ml-2 h-full z-50 bg-[#1D1D1D] overflow-y-auto transition-all ease-in-out duration-300 rounded-sm rounded-sm",
+          "fixed top-20 left-0 mt-5 h-full z-50 bg-[#1D1D1D] overflow-y-auto transition-all ease-in-out duration-300 rounded-sm ",
           isCollapsed ? "w-0 h-[60vh]" : "w-full h-[60vh]"
         )}
       >
@@ -80,7 +87,10 @@ const Navigation = () => {
             <ol className="ml-5 mt-2 list-decimal space-y-2">
               {documents?.map((document) => (
                 <li key={document._id} className="text-md">
-                  <Item label={document.title} onClick={() => {}} />
+                  <Item
+                    label={document.title}
+                    onClick={() => handleItemClick(document._id)}
+                  />
                 </li>
               ))}
             </ol>

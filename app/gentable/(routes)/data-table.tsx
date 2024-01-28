@@ -18,7 +18,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import React from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
@@ -32,6 +31,7 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
+
   const table = useReactTable({
     data,
     columns,
@@ -46,9 +46,11 @@ export function DataTable<TData, TValue>({
   const router = useRouter();
 
   const handleRowClick = (rowData: any) => {
-    const link = '/gens/' + rowData.id  // Adjust as per your data structure
+    const link = "/gens/" + rowData._id;
     router.push(link);
   };
+
+  console.log(table);
 
   return (
     <div className="flex rounded-md border w-3/4">
@@ -74,22 +76,18 @@ export function DataTable<TData, TValue>({
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
-              
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                  className="hover:cursor-pointer"
-                  onClick={() => handleRowClick(row.original)}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
+              <TableRow
+                key={row.id}
+                data-state={row.getIsSelected() && "selected"}
+                className="hover:cursor-pointer"
+                onClick={() => handleRowClick(row.original)}
+              >
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
+              </TableRow>
             ))
           ) : (
             <TableRow>
