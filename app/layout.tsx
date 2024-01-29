@@ -1,12 +1,21 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
+import { Open_Sans, Roboto_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
 import HeadingComponent from "./(landing)/_components/heading";
 import { Toaster } from "sonner";
 
-const inter = Inter({ subsets: ["latin"] });
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  display: "swap",
+});
+
+//👇 Configure the object for our second font
+const robotoMono = Roboto_Mono({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "CodeGen - Practice coding",
@@ -28,7 +37,7 @@ export default function RootLayout({
           disableTransitionOnChange
           storageKey="code-gen"
         >
-          <body className={inter.className}>
+          <body className={robotoMono.className}>
             <HeadingComponent />
             <Toaster position="bottom-center" />
             {children}

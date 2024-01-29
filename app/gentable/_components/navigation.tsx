@@ -66,7 +66,7 @@ const Navigation = () => {
       <aside
         ref={sidebarRef}
         className={cn(
-          "fixed top-20 left-0 mt-5 h-full z-50 bg-[#1D1D1D] overflow-y-auto transition-all ease-in-out duration-300 rounded-sm ",
+          "fixed top-20 left-0 ml-2 mt-5 h-full z-50 bg-[#0E0E0E] overflow-y-auto transition-all ease-in-out duration-300 rounded-2xl ",
           isCollapsed ? "w-0 h-[60vh]" : "w-full h-[60vh]"
         )}
       >
@@ -74,13 +74,19 @@ const Navigation = () => {
           role="button"
           onClick={collapse}
           className={cn(
-            "absolute w-6 h-6 transition rounded-lg text-muted-foreground hover-bg-neutral-300 top-5 right-5 group-hover/sidebar:opacity-100",
+            "absolute w-6 h-6 transition rounded-lg text-[#cccccc] hover-bg-neutral-300 top-4 right-5 group-hover/sidebar:opacity-100",
             isMobile && "opacity-100"
           )}
         >
           <ChevronsLeft className="w-6 h-6 " />
         </div>
-        <div className="p-4">{!isResetting && <p>Action Items</p>}</div>
+        <div className="p-4 bg-[#1A1A1A]">
+          {!isResetting && (
+            <h2 className="text-slate-100 text-md font-semibold">
+              Action Items
+            </h2>
+          )}
+        </div>
         <div className="p-4 mt-4">
           <h2>Gens</h2>
           {!isResetting && (
